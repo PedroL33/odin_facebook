@@ -1,0 +1,25 @@
+
+<% @users.each do |user| %>
+    <% if !current_user.friends.include?(user) %>
+        <div class = "block">
+            <div class="info">
+                <%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %> 
+            </div>
+            <% if current_user.pending_to_friends.include?(user) %>
+                <div class="action">
+                    <%= link_to "Accept friend request", request_path(get_request_id(user).id), method: :patch, class: :button %>
+                </div>
+            <% elsif current_user.pending_from_friends.include?(user) %>
+                <div class="action">
+                    A request has been sent.
+                </div>
+            <% else %>
+                <div class="action">
+                    <%= link_to "Add as friend", requests_path(to: user.id), method: :post, class: :button %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>   
+
+<%= will_paginate @users %>

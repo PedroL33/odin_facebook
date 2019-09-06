@@ -11,6 +11,13 @@
 
   <body>
     <%= render 'layouts/navbar' %>
+    <div class="flash">
+      <% flash.each do |key, val| %>
+        <div class="alert alert-<%= key %>">
+          <%= val %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

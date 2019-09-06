@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_042105) do
+ActiveRecord::Schema.define(version: 2019_09_05_044328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "from_id"
+    t.bigint "to_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_id", "to_id"], name: "index_requests_on_from_id_and_to_id", unique: true
+    t.index ["from_id"], name: "index_requests_on_from_id"
+    t.index ["to_id"], name: "index_requests_on_to_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

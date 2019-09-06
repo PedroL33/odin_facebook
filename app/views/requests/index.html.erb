@@ -1,0 +1,13 @@
+<% @to_requests.each do |request| %>
+    <div class="block">
+        <div class="info">
+            <%= "#{request.from_user.first_name} #{request.from_user.last_name}" %> 
+        </div>
+        <div class="action">
+            <%= link_to "Accept", request_path(request.id), method: :patch, class: :button %>
+        </div>
+    </div>
+<% end %>
+
+
+
