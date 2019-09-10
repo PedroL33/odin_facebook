@@ -1,0 +1,15 @@
+<h1>Your Friends</h1>
+
+<% @users.each do |friend| %>
+    <div class="content">
+        <% if current_user.picture? %>
+            <%= image_tag "#{current_user.picture}", class: :img %>
+        <% else %> 
+            <%= image_tag "default.png", class: :img %>
+        <% end %>
+        <%= link_to "#{friend.first_name} #{friend.last_name}", user_path(friend.id) %>
+    </div>
+<% end %>
+    
+
+<%= link_to "Find new friends", users_path %>

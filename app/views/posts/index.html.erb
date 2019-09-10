@@ -1,0 +1,6 @@
+<% @posts.each do |post| %>
+    <div class="block">
+        <%= link_to "#{post.creator.first_name} #{post.creator.last_name}", user_path(post.creator.id) %>
+        <%= post.content %>
+    </div>
+<% end %>

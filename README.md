@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Facebook mirror app 
 
-Things you may want to cover:
+Secure sign in with devise gem.
 
-* Ruby version
+Facebook API integration with Omniauth
 
-* System dependencies
+Photo upload with active storage
 
-* Configuration
+Mailing with SendGrid add-on
 
-* Database creation
+Final project for the Rails section of the Odin Project.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Can be found at https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project?ref=lnav

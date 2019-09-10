@@ -1,0 +1,26 @@
+<div class="post">
+    <div class="content">
+        <% if post.creator.picture? %>
+            <%= image_tag "#{post.creator.picture}", class: "user_image img" %>
+        <% else %>
+            <%= image_tag "default.png", class:"user_image img" %>
+        <% end %>
+        <%= link_to "#{post.creator.first_name} #{post.creator.last_name}", user_path(post.creator.id) %> 
+    </div>
+
+    <%= post.content %> 
+    <%= image_tag post.picture.url if post.picture? %>
+
+    <div class="stats">
+        <%= time_ago_in_words(post.created_at) %> ago
+        <% unless current_user.liked_posts.include?(post) %>
+            <%= link_to "Like", likes_path(post_id: post.id), method: :post %>
+        <% end %>
+        <% if post.creator.id = current_user.id %>
+            <%= link_to "Delete", post_path(post.id), method: :delete %>
+        <% end %>
+        <% unless post.users_liked.count == 0 %>
+            <%= "#{pluralize(post.users_liked.count, "like")}" %>
+        <% end %>
+    </div>
+</div>

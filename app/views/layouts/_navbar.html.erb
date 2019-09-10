@@ -1,24 +1,14 @@
-<ul class="nav">
-    <%= link_to image_tag("index.png", :alt => "facebook"), root_url %> 
+<div class="header">
+    <h1>Facebook</h1>
+    <p>Connect with your friends</p>
+</div>
+<div class="navbar">
+    <%= link_to "Home", root_url %> 
     <% if user_signed_in? %>
-        <li> <%= link_to "Logout", destroy_user_session_path, method: :delete %> </li>
-        <li> <%= link_to "#{pluralize(current_user.to_requests.count, "New friend request")}", requests_path(user_id: current_user), method: :get %> </li>
-        <li> Logged in as <%= current_user.email %> </li>
+        <%= link_to "Friends", user_friends_path(current_user.id), class: "push" %> 
+        <%= link_to "#{pluralize(current_user.to_requests.count, "New friend request")}", requests_path(user_id: current_user), method: :get %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
     <% else %>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <li>
-            <%= f.submit "Log in" %>
-            </li>
-
-            <li>
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "current-password" %>
-            </li>
-
-            <li>
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            </li>
-        <% end %>
+        <%= link_to "Login", new_user_session_path, class: :push     %>
     <% end %>
-</ul>
+</div>

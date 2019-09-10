@@ -5,6 +5,10 @@ ruby '2.6.3'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem "devise", git: 'https://github.com/plataformatec/devise.git'
 gem 'will_paginate', '~> 3.1.7'
+gem 'carrierwave',             '0.10.0'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.36.0'
+gem "letter_opener", :group => :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record

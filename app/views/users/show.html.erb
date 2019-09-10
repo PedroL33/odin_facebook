@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="side">
+        <h1><%="#{@user.first_name} #{@user.last_name} "%></h1> 
+        <% if @user.picture? %>
+            <%= image_tag "#{@user.picture}", class: :profile %>
+        <% else %>
+            <%= image_tag "default.png", class: :profile %>
+        <% end %>
+        <h2>About: </h2>
+        <p>Birthday: <%=@user.birthday%> </p>
+        <p>Email: <%=@user.email%> </p>
+
+    </div>
+
+    <div class="main">
+        <% @posts.each do |post| %>
+            <%= render partial: 'layouts/post_block', locals: {post: post} %>
+        <% end %>
+    </div>
+</div>
+
+
+
