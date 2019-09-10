@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   mount_uploader :picture, PictureUploader
 
-  #after_create :send_welcome_email
+  after_create :send_welcome_email
 
   def friends
     to_friends + from_friends
