@@ -1,16 +1,16 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4247080eb5ea1856a12860eedb08cf36ef8e2219
+  revision: c8821b5a3c350079d61d3a0e65291f9120e6e280
   branch: master
   specs:
-    faker (2.2.1)
+    faker (2.2.2)
       i18n (~> 1.6.0)
 
 GIT
   remote: https://github.com/plataformatec/devise.git
-  revision: fee43f3c11e176c53c5c3bfda7fd2e97c4c912be
+  revision: 098345aace53d4ddf88e04f1eb2680e2676e8c28
   specs:
-    devise (4.7.0)
+    devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -294,7 +294,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     ruby_dep (1.5.0)
-    rubyzip (1.2.3)
+    rubyzip (1.2.4)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
