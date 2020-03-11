@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       root to: 'static_pages#home'
     end
     unauthenticated :user do
-      root to: 'devise/registrations#new', as: :unauthenticated_root
+      root to: 'static_pages#landingpage', as: :unauthenticated_root
     end
   end
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   
   resources :requests, only: [:index, :create, :update]
-  resources :posts, only: [:indes, :create, :destroy]
+  resources :posts, only: [:index, :create, :destroy]
   resources :likes, only: [:create]
   resources :comments, only: [:create, :destroy]
 end

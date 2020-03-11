@@ -1,0 +1,19 @@
+<div class="container">
+    <% post.comments.each do |comment| %>
+        <div style="word-wrap: break-word" class="ml-3">
+            <% if comment.user_id == current_user.id %>    
+                <%= button_to "Delete", comment_path(comment.id), method: :delete, class:"btn btn-sm btn-danger float-right"%>
+            <% end %>
+            <%= link_to "#{comment.creator.first_name} #{comment.creator.last_name}", user_path(comment.creator.id) %>
+            <small class="text-muted mt-1"><%= time_ago_in_words(comment.created_at) %> ago</small>
+            <p class="ml-3"><%= comment.content %></p>
+        </div>
+    <% end %>
+    <div class="card-footer border-0">
+        <%= form_for :comment, url: comments_path, method: :post do |f| %>
+            <%= f.text_area :content, placeholder: "What do you think...", class: "form-control" %>
+            <%= f.hidden_field :post_id, value: post.id %>
+            <%= f.submit "Write a comment", class: "btn btn-info form-control" %>
+        <% end %>
+    </div>
+</div>

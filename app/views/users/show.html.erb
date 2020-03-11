@@ -1,23 +1,38 @@
-<div class="row">
-    <div class="side">
-        <h1><%="#{@user.first_name} #{@user.last_name} "%></h1> 
-        <% if @user.picture? %>
-            <%= image_tag "#{@user.picture}", class: :profile %>
-        <% else %>
-            <%= image_tag "default.png", class: :profile %>
-        <% end %>
-        <h2>About: </h2>
-        <p>Birthday: <%=@user.birthday%> </p>
-        <p>Email: <%=@user.email%> </p>
+<% if current_user.friends.include?(@user) %>
+    <div class="container mt-5">
+        <div class="jumbotron jumbotron-fluid text-center">
+            <div class="container">
+                <h1 class="display-4"><%="#{@user.first_name} #{@user.last_name} "%></h1>
+                <p class="lead">
+                    <p>Birthday: <%=@user.birthday%> </p>
+                    <p>Email: <%=@user.email%> </p>
+                </p>
+                <% if @user.picture? %>
+                    <%= image_tag "#{@user.picture}", class: "img-thumbnail" %>
+                <% else %> 
+                    <%= image_tag "default.png", class: "img-thumbnail" %>
+                <% end %>
+            </div>
+        </div>
 
-    </div>
-
-    <div class="main">
+        <h1>Recent Actiity</h1>
         <% @posts.each do |post| %>
             <%= render partial: 'layouts/post_block', locals: {post: post} %>
         <% end %>
     </div>
-</div>
-
-
+<% else %> 
+    <div class="jumbotron junbotron-fluid text-center">
+        <h1 class="display-4"><%="#{@user.first_name} #{@user.last_name} "%></h1>
+        <p class="lead">
+            <p>This user is not your friend.</p> 
+            <% if current_user.pending_to_friends.include?(@user) %>
+                <%= button_to "Accept friend request", request_path(get_request_id(@user).id), method: :patch, class: "btn btn-success" %>
+            <% elsif current_user.pending_from_friends.include?(@user) %>
+                <button class="disabled btn btn-outline-warning">Pending</button>
+            <% else %>
+                <%= button_to "Add as friend", requests_path(to: @user.id), method: :post, class: "btn btn-outline-success" %>
+            <% end %>
+        </p>
+    </div>
+<% end %>
 

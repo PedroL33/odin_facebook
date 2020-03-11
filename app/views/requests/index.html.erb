@@ -1,13 +1,43 @@
-<div class="content">
-    <% @to_requests.each do |request| %>
-        <% if request.from_user.picture? %>
-            <%= image_tag "#{request.from_user.picture}", class: :img %>
-        <% else %> 
-            <%= image_tag "default.png", class: :img %>
+<div class="container">
+    <div class="card">
+        <h2 class="card-header">
+            Friend Requests
+        </h2>
+        <% if @to_requests.length > 0 %>
+            <% @to_requests.each do |request| %>
+                <div class="card">
+                    <div class="card-body">
+                        <%= link_to "#{request.to_user.first_name} #{request.to_user.last_name}", user_path(request.to_user.id) %>
+                        <%= button_to "Accept", request_path(request.id), method: :patch, class: "btn btn-sm btn-outline-success float-right" %>
+                    </div>
+                </div>
+            <% end %>
+        <% else %>
+            <div class="card-body">
+                <h4>No new requests.</h4>
+            </div>
         <% end %>
-        <%= link_to "#{request.from_user.first_name} #{request.from_user.last_name}", user_path(request.from_user.id) %> 
-        <%= link_to "Accept", request_path(request.id), method: :patch, class: "button push" %>
-    <% end %>
+    </div>
+    
+    <div class="card mt-5">
+        <h2 class="card-header">
+            Pending requests
+        </h2>
+        <% if @from_requests.length > 0 %>
+            <% @from_requests.each do|request| %>
+                <div class="card">
+                    <div class="card-body">
+                        <%= link_to "#{request.to_user.first_name} #{request.to_user.last_name}", user_path(request.to_user.id) %>
+                        <button class="disabled btn btn-sm btn-outline-warning float-right">pending </button>
+                    </div>
+                </div>
+            <% end %>
+        <% else %>
+            <div class="card-body">
+                <h4>No pending requests.</h4>
+            <div>
+        <% end %>
+    </div>
 </div>
 
 

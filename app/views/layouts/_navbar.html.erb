@@ -1,14 +1,26 @@
-<div class="header">
-    <h1>Facebook</h1>
-    <p>Connect with your friends</p>
-</div>
-<div class="navbar">
-    <%= link_to "Home", root_url %> 
-    <% if user_signed_in? %>
-        <%= link_to "Friends", user_friends_path(current_user.id), class: "push" %> 
-        <%= link_to "#{pluralize(current_user.to_requests.count, "New friend request")}", requests_path(user_id: current_user), method: :get %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    <% else %>
-        <%= link_to "Login", new_user_session_path, class: :push     %>
-    <% end %>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to "Social Media", root_url, :class=> "navbar-brand" %>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "Friends", user_friends_path(current_user.id), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "#{pluralize(current_user.to_requests.count, "New friend request")}", requests_path(user_id: current_user), method: :get, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link btn btn-danger btn-sm text-white" %>
+        </li>
+      <% else %>
+        <li class="nav-item active">
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Signup", new_user_registration_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

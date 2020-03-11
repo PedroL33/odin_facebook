@@ -1,26 +1,33 @@
-<div class="post">
-    <div class="content">
-        <% if post.creator.picture? %>
-            <%= image_tag "#{post.creator.picture}", class: "user_image img" %>
-        <% else %>
-            <%= image_tag "default.png", class:"user_image img" %>
-        <% end %>
-        <%= link_to "#{post.creator.first_name} #{post.creator.last_name}", user_path(post.creator.id) %> 
+<div class="card m-2">
+    <div class="card-header">
+        <%= link_to "#{post.creator.first_name} #{post.creator.last_name}", user_path(post.creator.id) %>
+        <small class="text-muted mr-auto mt-1"><%= time_ago_in_words(post.created_at) %> ago</small>
     </div>
-
-    <%= post.content %> 
-    <%= image_tag post.picture.url if post.picture? %>
-
-    <div class="stats">
-        <%= time_ago_in_words(post.created_at) %> ago
+    <div class="card-body">
+        <div>
+            <p class="card-text">
+                <p>
+                    <%= post.content %> 
+                </p>
+                <%= image_tag post.picture.url if post.picture? %>
+            </p>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
         <% unless current_user.liked_posts.include?(post) %>
-            <%= link_to "Like", likes_path(post_id: post.id), method: :post %>
-        <% end %>
-        <% if post.creator.id = current_user.id %>
-            <%= link_to "Delete", post_path(post.id), method: :delete %>
+            <%= button_to "Like", likes_path(post_id: post.id), method: :post, class: "btn btn-success btn-sm mx-1" %>
         <% end %>
         <% unless post.users_liked.count == 0 %>
             <%= "#{pluralize(post.users_liked.count, "like")}" %>
         <% end %>
+        <% if post.user_id == current_user.id %>    
+            <%= button_to "Delete", post_path(post.id), method: :delete, class: "btn btn-danger btn-sm mx-1" %>
+        <% end %>
+        <a class="btn btn-primary btn-sm mx-1" data-toggle="collapse" href="#<%= post.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Comment (<%= post.comments.count %>)
+        </a>
     </div>
+</div>
+<div class="collapse" id="<%= post.id %>">
+    <%= render partial: 'layouts/comment_block', locals: {post: post} %>
 </div>

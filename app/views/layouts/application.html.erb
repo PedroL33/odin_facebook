@@ -4,7 +4,6 @@
     <title>OdinFacebook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -13,11 +12,41 @@
     <%= render 'layouts/navbar' %>
     <div class="flash">
       <% flash.each do |key, val| %>
-        <div class="alert alert-<%= key %>">
+        <% if key == 'notice' %>
+          <% key = 'info' %>
+        <% end %>
+        <div class="alert alert-<%= key %> text-center">
           <%= val %>
         </div>
       <% end %>
     </div>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="card col-3 m-2">
+              <% if current_user.picture? %>
+                <a href="/">
+                  <%= image_tag "#{current_user.picture}", class: "card-img mt-3 img-thumbnail" %>
+                </a>
+              <% else %> 
+                  <%= image_tag "default.png", class: "card-img-top mt-3 img-thumbnail" %>
+              <% end %>
+              <div class="card-body text-center">
+                <h2><%= "#{current_user.first_name}  #{current_user.last_name}" %></h2>
+                <div class="nav flex-column nav-tabs">
+                  <%= link_to "Friends", user_friends_path(current_user.id), class: "nav-link" %>
+                  <%= link_to "Requests", requests_path, class: "nav-link" %>
+                  <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+                </div>
+              </div>
+          </div>
+          <div class="col-8 m-2">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% else %>   
+      <%= yield %>
+    <% end %>
   </body>
 </html>

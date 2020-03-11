@@ -2,6 +2,10 @@ class PostsController < ApplicationController
     before_action :logged_in?
     before_action :correct_user, only: [:destroy]
 
+    def show
+        @posts = current_user.comments
+    end
+
     def index
         @posts = current_user.timeline_feed
     end

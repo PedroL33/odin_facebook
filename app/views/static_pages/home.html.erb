@@ -1,24 +1,13 @@
-<div class="row">
-    <div class="side">
-        <% if current_user.picture? %>
-            <%= image_tag "#{current_user.picture}", class: :profile %>
-        <% else %> 
-            <%= image_tag "default.png" %>
-        <% end %>
-        <h1> <%= "#{current_user.first_name} #{current_user.last_name}" %> </h1>
-        <%= link_to "Edit Profile", edit_user_registration_path %>
-    </div>
-
-    <div class="main">
-        <div class="post-input">
-            <%= form_for :new_post, url: posts_url, method: :post do |f| %>
-                <%= f.text_area :content, placeholder: "Whats on your mind?" %> </br>
-                <%= f.file_field :picture %>
-                <%= f.submit "Post" %>
-            <% end %>
+<%= form_for :new_post, url: posts_url, method: :post do |f| %>
+    <div class="form-group">
+        <div class="row">
+            <%= f.text_area :content, placeholder: "Whats on your mind?", class: "form-control" %> 
         </div>
-        <%= render "layouts/posts_feed" %> 
+        <div class="row">
+            <%= f.file_field :picture, class: "form-control col-md-4" %>
+            <%= f.submit "Post", class: "form-control btn btn-outline-info col-md-8" %>
+        </div>
     </div>
-</div>
-<%= will_paginate @post_feed %>
-
+<% end %>
+<%= render "layouts/posts_feed" %> 
+<%= will_paginate @post_feed, class: "justify-content-end" %>
