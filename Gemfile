@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 #bootstrap
-gem 'bootstrap', '~> 4.0.0', require: true
+gem 'bootstrap', '~> 4.3.1', require: true
 gem 'jquery-rails'
 gem 'sassc', '~> 2.1.0'
 gem 'will_paginate-bootstrap4'  
